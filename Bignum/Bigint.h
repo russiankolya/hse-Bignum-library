@@ -1,0 +1,10 @@
+#ifndef HSE_BIGNUM_LIBRARY_BIGINT_H
+#define HSE_BIGNUM_LIBRARY_BIGINT_H
+
+
+class Bigint {
+
+};
+
+
+#endif //HSE_BIGNUM_LIBRARY_BIGINT_H
