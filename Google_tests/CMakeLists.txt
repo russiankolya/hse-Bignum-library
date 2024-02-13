@@ -6,8 +6,8 @@ add_subdirectory(lib/googletest)
 include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 
 # 'Google_Tests_run' is the target name
-# 'BigintTest.cpp' are source file with tests
-add_executable(Google_Tests_run BigintTest.cpp)
+# 'BigintTest.cpp BigfloatTest.cpp' are source files with tests
+add_executable(Google_Tests_run BigintTest.cpp BigfloatTest.cpp)
 
 target_link_libraries(Google_Tests_run gtest gtest_main)
 target_link_libraries(Google_Tests_run Bignum)
