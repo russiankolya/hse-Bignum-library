@@ -1,6 +1,9 @@
 #include <iostream>
+#include "Bigint.h"
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
-    return 0;
+    Bigint a(123);
+    Bigint b(456);
+
+    std::cout << a + b << "\n";
 }
