@@ -39,7 +39,9 @@ std::string Bigint::to_string() const {
 
 Bigint Bigint::operator-() const {
     Bigint result = *this;
-    result._isNegative = !_isNegative;
+    if (result._value != "0") {
+        result._isNegative = !_isNegative;
+    }
     return result;
 }
 
