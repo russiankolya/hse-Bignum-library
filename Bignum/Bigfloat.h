@@ -15,13 +15,6 @@ public:
     /// \warning Sum of the integer part length and precision must be less than 18
     explicit Bigfloat(double value = 0.0, uint8_t precision = 6);
 
-    /// \brief Constructor from string
-    /// \details Initializes the value to the given string and precision to 6
-    /// \param value string value to be converted to Bigfloat
-    /// \param precision uint8_t precision of the floating point number
-    /// \warning There are not allowed leading zeros in integer part and any symbols except digits, dot and minus in value
-    explicit Bigfloat(const std::string &value, uint8_t precision = 6);
-
     /// \brief Value getter
     /// \details Returns the value of the big floating point number. Literally the value of the Bigfloat is a concatenation of the integer part and the fractional part
     /// \return Bigint
