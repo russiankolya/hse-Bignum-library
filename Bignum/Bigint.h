@@ -7,6 +7,10 @@ public:
     explicit Bigint(int64_t value = 0);
     explicit Bigint(const std::string &value);
 
+    std::string get_value() const;
+    bool is_negative() const;
+    [[nodiscard]] std::string to_string() const;
+
     Bigint operator-() const;
 
     Bigint operator+(const Bigint &other) const;

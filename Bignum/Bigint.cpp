@@ -20,6 +20,23 @@ Bigint::Bigint(const std::string &value) {
     }
 }
 
+std::string Bigint::get_value() const {
+    return _value;
+}
+
+bool Bigint::is_negative() const {
+    return _isNegative;
+}
+
+std::string Bigint::to_string() const {
+    std::string result;
+    if (_isNegative) {
+        result += '-';
+    }
+    result += _value;
+    return result;
+}
+
 Bigint Bigint::operator-() const {
     Bigint result = *this;
     result._isNegative = !_isNegative;
@@ -103,10 +120,7 @@ bool Bigint::operator>=(const Bigint &other) const {
 }
 
 std::ostream &operator<<(std::ostream &os, const Bigint &bigint) {
-    if (bigint._isNegative) {
-        os << '-';
-    }
-    os << bigint._value;
+    os << bigint.to_string();
     return os;
 }
 
