@@ -47,6 +47,60 @@ Bigint Bigint::operator-() const {
     return result;
 }
 
+std::string Bigint::add(std::string value1, std::string value2) {
+    std::reverse(value1.begin(), value1.end());
+    std::reverse(value2.begin(), value2.end());
+
+    if (value1.size() < value2.size()) {
+        std::swap(value1, value2);
+    }
+
+    std::string result;
+    int carry = 0;
+    for (size_t i = 0; i < value1.size(); ++i) {
+        int sum = (value1[i] - '0');
+        if (i < value2.size()) {
+            sum += (value2[i] - '0');
+        }
+        sum += (carry);
+        result += static_cast<char>('0' + (sum % 10));
+        carry = sum / 10;
+    }
+    if (carry > 0) {
+        result += static_cast<char>('0' + carry);
+    }
+    std::reverse(result.begin(), result.end());
+    return result;
+}
+
+std::string Bigint::subtract(std::string value1, std::string value2) {
+    std::reverse(value1.begin(), value1.end());
+    std::reverse(value2.begin(), value2.end());
+
+    std::string result;
+    int carry = 0;
+    for (size_t i = 0; i < value1.size(); ++i) {
+        int diff = (value1[i] - '0');
+        if (i < value2.size()) {
+            diff -= (value2[i] - '0');
+        }
+        diff -= (carry);
+        if (diff < 0) {
+            diff += 10;
+            carry = 1;
+        } else {
+            carry = 0;
+        }
+        result += static_cast<char>('0' + diff);
+    }
+    while (result.size() > 1 && result.back() == '0') {
+        result.pop_back();
+    }
+    std::reverse(result.begin(), result.end());
+    return result;
+
+}
+
 Bigint Bigint::operator+(const Bigint &other) const {
     int64_t value1 = _is_negative ? -std::stoll(_value) : std::stoll(_value);
     int64_t value2 = other._is_negative ? -std::stoll(other._value) : std::stoll(other._value);

@@ -29,6 +29,22 @@ public:
     /// \returns Bigint with the opposite sign
     Bigint operator-() const;
 
+
+    /// Addition of two strings representing Bigint
+    /// \param value1 first string
+    /// \param value2 second string
+    /// \returns string representing the sum of the two strings
+    /// \note This method is static
+    static std::string add(std::string value1, std::string value2);
+
+    /// Subtraction of two strings representing Bigint
+    /// \param value1 first string
+    /// \param value2 second string
+    /// \returns string representing the difference of the two strings
+    /// \warning value1 must be greater than or equal to value2
+    /// \note This method is static
+    static std::string subtract(std::string value1, std::string value2);
+
     Bigint operator+(const Bigint &other) const;
     Bigint operator-(const Bigint &other) const;
     Bigint operator*(const Bigint &other) const;
@@ -52,9 +68,6 @@ public:
 private:
     std::string _value;
     bool _is_negative;
-
-    static std::string add(const std::string& value1, const std::string& value2);
-    static std::string subtract(const std::string& value1, const std::string& value2);
 };
 
 #endif
