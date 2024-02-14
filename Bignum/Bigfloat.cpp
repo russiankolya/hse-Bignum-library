@@ -1,5 +1,10 @@
 #include "Bigfloat.h"
 
+Bigfloat::Bigfloat(Bigint number, uint8_t precision) {
+    _number = number;
+    _precision = precision;
+}
+
 Bigfloat::Bigfloat(std::string number, uint8_t precision) : _precision(precision) {
     bool is_negative = false;
     if (number[0] == '-') {
@@ -80,4 +85,8 @@ std::string Bigfloat::to_string() const {
         result.insert(result.size() - _precision, ".");
     }
     return _number.is_negative() ? "-" + result : result;
+}
+
+Bigfloat Bigfloat::operator-() const {
+    return {-_number, _precision};
 }

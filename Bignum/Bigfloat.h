@@ -75,6 +75,8 @@ public:
 private:
     Bigint _number;
     uint8_t _precision;
+
+    Bigfloat(Bigint number, uint8_t precision = 6);
 };
 
 #endif
