@@ -95,3 +95,46 @@ std::string Bigfloat::to_string() const {
 Bigfloat Bigfloat::operator-() const {
     return {-_number, _precision};
 }
+
+Bigfloat Bigfloat::add(const Bigfloat &other, uint8_t precision) const {
+    uint8_t max_precision = std::max(_precision, other._precision);
+    Bigint number1 = _number;
+    Bigint number2 = other._number;
+    for (uint8_t i = 0; i < max_precision - _precision; i++) {
+        number1 *= Bigint(10);
+    }
+    for (uint8_t i = 0; i < max_precision - other._precision; i++) {
+        number2 *= Bigint(10);
+    }
+    Bigint result = number1 + number2;
+    while (max_precision < precision) {
+        result *= Bigint(10);
+        max_precision++;
+    }
+    while (max_precision > precision) {
+        result /= Bigint(10);
+        max_precision--;
+    }
+    return {result, precision};
+}
+
+Bigfloat Bigfloat::subtract(const Bigfloat &other, uint8_t precision) const {
+    return add(-other, precision);
+}
+
+Bigfloat Bigfloat::multiply(const Bigfloat &other, uint8_t precision) const {
+    Bigint number1 = _number;
+    Bigint number2 = other._number;
+
+    Bigint result = number1 * number2;
+    uint8_t new_precision = _precision + other._precision;
+    while (new_precision < precision) {
+        result *= Bigint(10);
+        new_precision++;
+    }
+    while (new_precision > precision) {
+        result /= Bigint(10);
+        new_precision--;
+    }
+    return {result, precision};
+}

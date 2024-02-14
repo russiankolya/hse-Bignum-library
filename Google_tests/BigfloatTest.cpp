@@ -133,3 +133,145 @@ TEST(BigfloatTest, testToString10) {
     Bigfloat bigfloat("-0", 0);
     ASSERT_EQ(bigfloat.to_string(), "0");
 }
+
+
+
+/// Unary minus operator test
+TEST(BigfloatTest, testUnaryMinus1) {
+    Bigfloat bigfloat("123.456789", 6);
+    ASSERT_EQ((-bigfloat).to_string(), "-123.456789");
+}
+
+TEST(BigfloatTest, testUnaryMinus2) {
+    Bigfloat bigfloat("-123.456789", 6);
+    ASSERT_EQ((-bigfloat).to_string(), "123.456789");
+}
+
+TEST(BigfloatTest, testUnaryMinus3) {
+    Bigfloat bigfloat("0", 6);
+    ASSERT_EQ((-bigfloat).to_string(), "0.000000");
+}
+
+
+
+/// Add function test
+TEST(BigfloatTest, testAdd1) {
+    Bigfloat bigfloat1("123.456789", 6);
+    Bigfloat bigfloat2("123.456789", 6);
+    ASSERT_EQ(bigfloat1.add(bigfloat2, 6).to_string(), "246.913578");
+    ASSERT_EQ(bigfloat2.add(bigfloat1, 6).to_string(), "246.913578");
+}
+
+TEST(BigfloatTest, testAdd2) {
+    Bigfloat bigfloat1("123.456789", 6);
+    Bigfloat bigfloat2("123.456789", 2);
+    ASSERT_EQ(bigfloat1.add(bigfloat2, 6).to_string(), "246.906789");
+    ASSERT_EQ(bigfloat2.add(bigfloat1, 6).to_string(), "246.906789");
+}
+
+TEST(BigfloatTest, testAdd3) {
+    Bigfloat bigfloat1("123.456789", 6);
+    Bigfloat bigfloat2("123.456789", 8);
+    ASSERT_EQ(bigfloat1.add(bigfloat2, 6).to_string(), "246.913578");
+    ASSERT_EQ(bigfloat2.add(bigfloat1, 6).to_string(), "246.913578");
+}
+
+TEST(BigfloatTest, testAdd4) {
+    Bigfloat bigfloat1("123.456789", 6);
+    Bigfloat bigfloat2("123.456789", 8);
+    ASSERT_EQ(bigfloat1.add(bigfloat2, 0).to_string(), "246");
+    ASSERT_EQ(bigfloat2.add(bigfloat1, 0).to_string(), "246");
+}
+
+TEST(BigfloatTest, testAdd5) {
+    Bigfloat bigfloat1("123.456789", 6);
+    Bigfloat bigfloat2("-123.456789", 6);
+    ASSERT_EQ(bigfloat1.add(bigfloat2, 6).to_string(), "0.000000");
+    ASSERT_EQ(bigfloat2.add(bigfloat1, 6).to_string(), "0.000000");
+}
+
+TEST(BigfloatTest, testAdd6) {
+    Bigfloat bigfloat1("123.456789", 6);
+    Bigfloat bigfloat2("-123.456789", 6);
+    ASSERT_EQ(bigfloat1.add(bigfloat2, 0).to_string(), "0");
+    ASSERT_EQ(bigfloat2.add(bigfloat1, 0).to_string(), "0");
+}
+
+TEST(BigfloatTest, testAdd7) {
+    Bigfloat bigfloat1("-123.456789", 6);
+    Bigfloat bigfloat2("0", 6);
+    ASSERT_EQ(bigfloat1.add(bigfloat2, 8).to_string(), "-123.45678900");
+    ASSERT_EQ(bigfloat2.add(bigfloat1, 8).to_string(), "-123.45678900");
+}
+
+TEST(BigfloatTest, testAdd8) {
+    Bigfloat bigfloat1("-123.456789", 6);
+    Bigfloat bigfloat2("-0", 6);
+    ASSERT_EQ(bigfloat1.add(bigfloat2, 8).to_string(), "-123.45678900");
+    ASSERT_EQ(bigfloat2.add(bigfloat1, 8).to_string(), "-123.45678900");
+}
+
+
+
+/// Subtraction function test
+TEST(BigfloatTest, testSubtract1) {
+    Bigfloat bigfloat1("123.456789", 6);
+    Bigfloat bigfloat2("123.456789", 6);
+    ASSERT_EQ(bigfloat1.subtract(bigfloat2, 6).to_string(), "0.000000");
+}
+
+TEST(BigfloatTest, testSubtract2) {
+    Bigfloat bigfloat1("123.456789", 6);
+    Bigfloat bigfloat2("123.456789", 6);
+    ASSERT_EQ(bigfloat1.subtract(bigfloat2, 8).to_string(), "0.00000000");
+}
+
+TEST(BigfloatTest, testSubtract3) {
+    Bigfloat bigfloat1("123.456789", 6);
+    Bigfloat bigfloat2("123.456789", 2);
+    ASSERT_EQ(bigfloat1.subtract(bigfloat2, 6).to_string(), "0.006789");
+}
+
+TEST(BigfloatTest, testSubtract4) {
+    Bigfloat bigfloat1("123.456789", 6);
+    Bigfloat bigfloat2("123.456789", 8);
+    ASSERT_EQ(bigfloat1.subtract(bigfloat2, 10).to_string(), "0.0000000000");
+}
+
+
+
+/// Multiplication function test
+TEST(BigfloatTest, testMultiply1) {
+    Bigfloat bigfloat1("123.456789", 6);
+    Bigfloat bigfloat2("123.456789", 6);
+    ASSERT_EQ(bigfloat1.multiply(bigfloat2, 8).to_string(), "15241.57875019");
+    ASSERT_EQ(bigfloat2.multiply(bigfloat1, 8).to_string(), "15241.57875019");
+}
+
+TEST(BigfloatTest, testMultiply2) {
+    Bigfloat bigfloat1("123.456789", 6);
+    Bigfloat bigfloat2("123.456789", 6);
+    ASSERT_EQ(bigfloat1.multiply(bigfloat2, 0).to_string(), "15241");
+    ASSERT_EQ(bigfloat2.multiply(bigfloat1, 0).to_string(), "15241");
+}
+
+TEST(BigfloatTest, testMultiply3) {
+    Bigfloat bigfloat1("-123.456789", 6);
+    Bigfloat bigfloat2("1", 6);
+    ASSERT_EQ(bigfloat1.multiply(bigfloat2, 2).to_string(), "-123.45");
+    ASSERT_EQ(bigfloat2.multiply(bigfloat1, 2).to_string(), "-123.45");
+}
+
+TEST(BigfloatTest, testMultiply4) {
+    Bigfloat bigfloat1("1.1", 6);
+    Bigfloat bigfloat2("1.2", 6);
+    ASSERT_EQ(bigfloat1.multiply(bigfloat2, 4).to_string(), "1.3200");
+    ASSERT_EQ(bigfloat2.multiply(bigfloat1, 4).to_string(), "1.3200");
+}
+
+TEST(BigfloatTest, testMultiply5) {
+    Bigfloat bigfloat1("0.0001", 6);
+    Bigfloat bigfloat2("10000", 6);
+    ASSERT_EQ(bigfloat1.multiply(bigfloat2, 6).to_string(), "1.000000");
+    ASSERT_EQ(bigfloat2.multiply(bigfloat1, 6).to_string(), "1.000000");
+}
