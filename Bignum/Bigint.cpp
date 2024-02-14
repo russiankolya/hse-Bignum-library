@@ -102,15 +102,11 @@ std::string Bigint::subtract(std::string value1, std::string value2) {
 }
 
 Bigint Bigint::operator+(const Bigint &other) const {
-    int64_t value1 = _is_negative ? -std::stoll(_value) : std::stoll(_value);
-    int64_t value2 = other._is_negative ? -std::stoll(other._value) : std::stoll(other._value);
-    return Bigint(value1 + value2);
+
 }
 
 Bigint Bigint::operator-(const Bigint &other) const {
-    int64_t value1 = _is_negative ? -std::stoll(_value) : std::stoll(_value);
-    int64_t value2 = other._is_negative ? -std::stoll(other._value) : std::stoll(other._value);
-    return Bigint(value1 - value2);
+
 }
 
 Bigint Bigint::operator*(const Bigint &other) const {
@@ -154,14 +150,30 @@ bool Bigint::operator!=(const Bigint &other) const {
 }
 
 bool Bigint::operator<(const Bigint &other) const {
-    if (_is_negative && !other._is_negative) {
-        return true;
-    } else if (!_is_negative && other._is_negative) {
-        return false;
-    } else if (_is_negative && other._is_negative) {
-        return -stoll(_value) > -stoll(other._value);
+    if (_is_negative == other._is_negative) {
+        if (!_is_negative) {
+            if (_value.size() < other._value.size()) {
+                return true;
+            }
+            if (_value.size() > other._value.size()) {
+                return false;
+            }
+            return _value < other._value;
+        } else {
+            if (_value.size() < other._value.size()) {
+                return false;
+            }
+            if (_value.size() > other._value.size()) {
+                return true;
+            }
+            return _value > other._value;
+        }
     } else {
-        return stoll(_value) < stoll(other._value);
+        if (_is_negative) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
 
