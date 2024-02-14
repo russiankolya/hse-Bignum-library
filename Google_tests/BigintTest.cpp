@@ -199,6 +199,51 @@ TEST(BigintTest, testSubtraction1) {
 
 
 
+// Multiplication operator tests
+TEST(BigintTest, testMultiplication1) {
+    Bigint bigint1(123);
+    Bigint bigint2(456);
+    ASSERT_EQ("56088", (bigint1 * bigint2).to_string());
+    ASSERT_EQ("56088", (bigint2 * bigint1).to_string());
+}
+
+TEST(BigintTest, testMultiplication2) {
+    Bigint bigint1(-12345);
+    Bigint bigint2(45678);
+    ASSERT_EQ("-563894910", (bigint1 * bigint2).to_string());
+    ASSERT_EQ("-563894910", (bigint2 * bigint1).to_string());
+}
+
+TEST(BigintTest, testMultiplication3) {
+    Bigint bigint1(-12345);
+    Bigint bigint2(-45678);
+    ASSERT_EQ("563894910", (bigint1 * bigint2).to_string());
+    ASSERT_EQ("563894910", (bigint2 * bigint1).to_string());
+}
+
+TEST(BigintTest, testMultiplication4) {
+    Bigint bigint1(12345);
+    Bigint bigint2(0);
+    ASSERT_EQ("0", (bigint1 * bigint2).to_string());
+    ASSERT_EQ("0", (bigint2 * bigint1).to_string());
+}
+
+TEST(BigintTest, testMultiplication5) {
+    Bigint bigint1(12345);
+    Bigint bigint2(1);
+    ASSERT_EQ("12345", (bigint1 * bigint2).to_string());
+    ASSERT_EQ("12345", (bigint2 * bigint1).to_string());
+}
+
+TEST(BigintTest, testMultiplication6) {
+    Bigint bigint1("-57934567923704");
+    Bigint bigint2("83475389758497223");
+    ASSERT_EQ("-4836110637921322606690359873992", (bigint1 * bigint2).to_string());
+    ASSERT_EQ("-4836110637921322606690359873992", (bigint2 * bigint1).to_string());
+}
+
+
+
 // Test equality operator
 TEST(BigintTest, testEquality1) {
     Bigint bigint1(123);

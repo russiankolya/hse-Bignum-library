@@ -130,9 +130,45 @@ Bigint Bigint::operator-(const Bigint &other) const {
 }
 
 Bigint Bigint::operator*(const Bigint &other) const {
-    int64_t value1 = _is_negative ? -std::stoll(_value) : std::stoll(_value);
-    int64_t value2 = other._is_negative ? -std::stoll(other._value) : std::stoll(other._value);
-    return Bigint(value1 * value2);
+    std::string value1 = _value;
+    std::string value2 = other._value;
+
+    size_t value1_size = value1.size();
+    size_t value2_size = value2.size();
+
+    std::vector<int> result(value1_size + value2_size, 0);
+
+    for (int i = static_cast<int>(value1_size) - 1; i >= 0; --i) {
+        for (int j = static_cast<int>(value2_size) - 1; j >= 0; --j) {
+            int mul = (value1[i] - '0') * (value2[j] - '0');
+            int sum = result[i + j + 1] + mul;
+            result[i + j + 1] = sum % 10;
+            result[i + j] += sum / 10;
+        }
+    }
+
+    // Remove leading zeros
+    std::reverse(result.begin(), result.end());
+    while (result.size() > 1 && result.back() == 0) {
+        result.pop_back();
+    }
+    std::reverse(result.begin(), result.end());
+
+    std::string string_result;
+    for (int c : result) {
+        string_result += static_cast<char>('0' + c);
+    }
+
+    bool is_negative = _is_negative ^ other._is_negative;
+    if (string_result == "0") {
+        is_negative = false;
+    }
+
+    if (!is_negative) {
+        return Bigint(string_result);
+    } else {
+        return Bigint("-" + string_result);
+    }
 }
 
 Bigint Bigint::operator/(const Bigint &other) const {
