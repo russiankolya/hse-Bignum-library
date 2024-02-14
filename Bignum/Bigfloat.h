@@ -26,13 +26,13 @@ public:
     Bigfloat operator-() const;
 
     /// Addition of two Bigfloat with given precision
-    Bigfloat add(const Bigfloat& other, uint8_t precision) const;
+    [[nodiscard]] Bigfloat add(const Bigfloat& other, uint8_t precision) const;
     /// Subtraction of two Bigfloat with given precision
-    Bigfloat subtract(const Bigfloat& other, uint8_t precision) const;
+    [[nodiscard]] Bigfloat subtract(const Bigfloat& other, uint8_t precision) const;
     /// Multiplication of two Bigfloat with given precision
-    Bigfloat multiply(const Bigfloat& other, uint8_t precision) const;
+    [[nodiscard]] Bigfloat multiply(const Bigfloat& other, uint8_t precision) const;
     /// Division of two Bigfloat with given precision
-    Bigfloat divide(const Bigfloat& other, uint8_t precision) const;
+    [[nodiscard]] Bigfloat divide(const Bigfloat& other, uint8_t precision) const;
 
 
     /// Addition operator of two Bigfloat
@@ -76,7 +76,7 @@ private:
     Bigint _number;
     uint8_t _precision;
 
-    Bigfloat(Bigint number, uint8_t precision = 6);
+    explicit Bigfloat(Bigint number, uint8_t precision = 6);
 };
 
 #endif
