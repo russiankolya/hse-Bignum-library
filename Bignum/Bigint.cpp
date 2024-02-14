@@ -12,8 +12,10 @@ Bigint::Bigint(int64_t value) {
 
 Bigint::Bigint(const std::string &value) {
     if (value[0] == '-') {
-        _is_negative = true;
         _value = value.substr(1);
+        if (_value != "0") {
+            _is_negative = true;
+        }
     } else {
         _is_negative = false;
         _value = value;
