@@ -84,7 +84,7 @@ std::string Bigint::subtract(std::string value1, std::string value2) {
         if (i < value2.size()) {
             diff -= (value2[i] - '0');
         }
-        diff -= (carry);
+        diff -= carry;
         if (diff < 0) {
             diff += 10;
             carry = 1;
@@ -102,11 +102,31 @@ std::string Bigint::subtract(std::string value1, std::string value2) {
 }
 
 Bigint Bigint::operator+(const Bigint &other) const {
-
+    if (_is_negative == other._is_negative) {
+        if (!_is_negative) {
+            return Bigint(add(_value, other._value));
+        } else {
+            return -Bigint(add((-*this)._value, (-other)._value));;
+        }
+    } else {
+        if (!_is_negative) {
+            if (*this > -other) {
+                return Bigint(subtract(_value, (-other)._value));
+            } else {
+                return -Bigint(subtract((-other)._value, _value));
+            }
+        } else {
+            if (other > -*this) {
+                return Bigint(subtract(other._value, (-*this)._value));
+            } else {
+                return -Bigint(subtract((-*this)._value, other._value));
+            }
+        }
+    }
 }
 
 Bigint Bigint::operator-(const Bigint &other) const {
-
+    return *this + (-other);
 }
 
 Bigint Bigint::operator*(const Bigint &other) const {

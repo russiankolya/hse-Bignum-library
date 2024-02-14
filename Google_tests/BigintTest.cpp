@@ -152,6 +152,53 @@ TEST(BigintTest, testSubtract4) {
 
 
 
+// Addition operator tests
+TEST(BigintTest, testAddition1) {
+    Bigint bigint1(123);
+    Bigint bigint2(456);
+    ASSERT_EQ("579", (bigint1 + bigint2).to_string());
+    ASSERT_EQ("579", (bigint2 + bigint1).to_string());
+}
+
+TEST(BigintTest, testAddition2) {
+    Bigint bigint1(-123);
+    Bigint bigint2(-456);
+    ASSERT_EQ("-579", (bigint1 + bigint2).to_string());
+    ASSERT_EQ("-579", (bigint2 + bigint1).to_string());
+}
+
+TEST(BigintTest, testAddition3) {
+    Bigint bigint1(-123);
+    Bigint bigint2(456);
+    ASSERT_EQ("333", (bigint1 + bigint2).to_string());
+    ASSERT_EQ("333", (bigint2 + bigint1).to_string());
+}
+
+TEST(BigintTest, testAddition4) {
+    Bigint bigint1(123);
+    Bigint bigint2(-456);
+    ASSERT_EQ("-333", (bigint1 + bigint2).to_string());
+    ASSERT_EQ("-333", (bigint2 + bigint1).to_string());
+}
+
+TEST(BigintTest, testAddition5) {
+    Bigint bigint1(0);
+    Bigint bigint2(456);
+    ASSERT_EQ("456", (bigint1 + bigint2).to_string());
+    ASSERT_EQ("456", (bigint2 + bigint1).to_string());
+}
+
+
+
+// Subtraction operator tests
+TEST(BigintTest, testSubtraction1) {
+    Bigint bigint1(456);
+    Bigint bigint2(123);
+    ASSERT_EQ("333", (bigint1 - bigint2).to_string());
+}
+
+
+
 // Test equality operator
 TEST(BigintTest, testEquality1) {
     Bigint bigint1(123);
