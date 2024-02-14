@@ -8,7 +8,7 @@ public:
     /// \param number string representation of the number
     /// \param precision uint8_t precision
     /// \note Default precision is 6
-    Bigfloat(std::string number = 0, uint8_t precision = 6);
+    Bigfloat(std::string number = "0", uint8_t precision = 6);
 
     /// Number getter
     /// \return Bigint number
@@ -76,7 +76,7 @@ private:
     Bigint _number;
     uint8_t _precision;
 
-    Bigfloat(Bigint number = Bigint(0), uint8_t precision = 6);
+    Bigfloat(Bigint number, uint8_t precision = 6);
 };
 
 #endif
