@@ -14,7 +14,7 @@ public:
 
     /// value getter
     /// \return std::string absolut value of the Bigint
-    [[nodiscard]] std::string get_value() const;
+    [[nodiscard]] std::string value() const;
 
     /// is_negative getter
     /// \return bool true if the Bigint is negative

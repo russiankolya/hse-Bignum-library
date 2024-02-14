@@ -20,7 +20,7 @@ Bigint::Bigint(const std::string &value) {
     }
 }
 
-std::string Bigint::get_value() const {
+std::string Bigint::value() const {
     return _value;
 }
 
