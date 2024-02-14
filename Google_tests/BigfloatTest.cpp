@@ -66,18 +66,22 @@ TEST(BigfloatTest, testStringConstructor9) {
 }
 
 TEST(BigfloatTest, testStringConstructor10) {
-    ASSERT_ANY_THROW(Bigfloat("00.31312"));
+    Bigfloat bigfloat("1", 8);
+    ASSERT_EQ(bigfloat.number().to_string(), "100000000");
+    ASSERT_EQ(bigfloat.precision(), 8);
 }
 
 TEST(BigfloatTest, testStringConstructor11) {
-    ASSERT_ANY_THROW(Bigfloat(".31312"));
+    ASSERT_ANY_THROW(Bigfloat("00.31312"));
 }
 
 TEST(BigfloatTest, testStringConstructor12) {
-    ASSERT_ANY_THROW(Bigfloat("31.31.2"));
+    ASSERT_ANY_THROW(Bigfloat(".31312"));
 }
 
-
+TEST(BigfloatTest, testStringConstructor13) {
+    ASSERT_ANY_THROW(Bigfloat("31.31.2"));
+}
 
 /// to_string method test
 TEST(BigfloatTest, testToString1) {

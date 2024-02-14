@@ -24,6 +24,11 @@ Bigfloat::Bigfloat(std::string number, uint8_t precision) : _precision(precision
 
     if (dot_position == std::string::npos) {
         _number = Bigint(number);
+        uint8_t current_precision = 0;
+        while (current_precision < precision) {
+            _number *= Bigint(10);
+            current_precision++;
+        }
     } else {
         std::string integer_part = number.substr(0, dot_position);
         std::string fractional_part = number.substr(dot_position + 1);
