@@ -138,3 +138,15 @@ Bigfloat Bigfloat::multiply(const Bigfloat &other, uint8_t precision) const {
     }
     return Bigfloat(result, precision);
 }
+
+std::ostream &operator<<(std::ostream &os, const Bigfloat &bigfloat) {
+    os << bigfloat.to_string();
+    return os;
+}
+
+std::istream &operator>>(std::istream &is, Bigfloat &bigfloat) {
+    std::string number;
+    is >> number;
+    bigfloat = Bigfloat(number, bigfloat.precision());
+    return is;
+}
