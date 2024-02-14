@@ -93,7 +93,7 @@ std::string Bigfloat::to_string() const {
 }
 
 Bigfloat Bigfloat::operator-() const {
-    return {-_number, _precision};
+    return Bigfloat(-_number, _precision);
 }
 
 Bigfloat Bigfloat::add(const Bigfloat &other, uint8_t precision) const {
@@ -115,7 +115,7 @@ Bigfloat Bigfloat::add(const Bigfloat &other, uint8_t precision) const {
         result /= Bigint(10);
         max_precision--;
     }
-    return {result, precision};
+    return Bigfloat(result, precision);
 }
 
 Bigfloat Bigfloat::subtract(const Bigfloat &other, uint8_t precision) const {
@@ -136,5 +136,5 @@ Bigfloat Bigfloat::multiply(const Bigfloat &other, uint8_t precision) const {
         result /= Bigint(10);
         new_precision--;
     }
-    return {result, precision};
+    return Bigfloat(result, precision);
 }
