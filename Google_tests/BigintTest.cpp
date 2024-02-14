@@ -244,6 +244,75 @@ TEST(BigintTest, testMultiplication6) {
 
 
 
+// Division operator tests
+TEST(BigintTest, testDivision1) {
+    Bigint bigint1(456);
+    Bigint bigint2(123);
+    ASSERT_EQ("3", (bigint1 / bigint2).to_string());
+}
+
+TEST(BigintTest, testDivision2) {
+    Bigint bigint1(123);
+    Bigint bigint2(456);
+    ASSERT_EQ("0", (bigint1 / bigint2).to_string());
+}
+
+TEST(BigintTest, testDivision3) {
+    Bigint bigint1(123);
+    Bigint bigint2(123);
+    ASSERT_EQ("1", (bigint1 / bigint2).to_string());
+}
+
+TEST(BigintTest, testDivision4) {
+    Bigint bigint1(123);
+    Bigint bigint2(1);
+    ASSERT_EQ("123", (bigint1 / bigint2).to_string());
+}
+
+TEST(BigintTest, testDivision5) {
+    Bigint bigint1(123);
+    Bigint bigint2(-23);
+    ASSERT_EQ("-5", (bigint1 / bigint2).to_string());
+}
+
+TEST(BigintTest, testDivision6) {
+    Bigint bigint1(-123);
+    Bigint bigint2(23);
+    ASSERT_EQ("-5", (bigint1 / bigint2).to_string());
+}
+
+TEST(BigintTest, testDivision7) {
+    Bigint bigint1(-123);
+    Bigint bigint2(-23);
+    ASSERT_EQ("5", (bigint1 / bigint2).to_string());
+}
+
+TEST(BigintTest, testDivision8) {
+    Bigint bigint1("9587345983475345873129372197");
+    Bigint bigint2("412343242342342384092384203");
+    ASSERT_EQ("23", (bigint1 / bigint2).to_string());
+}
+
+TEST(BigintTest, testDivision9) {
+    Bigint bigint1("9587345983475345873129372197");
+    Bigint bigint2("9587345983475345873129372197");
+    ASSERT_EQ("1", (bigint1 / bigint2).to_string());
+}
+
+TEST(BigintTest, testDivision10) {
+    Bigint bigint1("-0");
+    Bigint bigint2("312321");
+    ASSERT_EQ("0", (bigint1 / bigint2).to_string());
+}
+
+TEST(BigintTest, testDivision11) {
+    Bigint bigint1("312323");
+    Bigint bigint2("0");
+    ASSERT_ANY_THROW(bigint1 / bigint2);
+}
+
+
+
 // Test equality operator
 TEST(BigintTest, testEquality1) {
     Bigint bigint1(123);

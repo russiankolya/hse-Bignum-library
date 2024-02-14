@@ -147,7 +147,6 @@ Bigint Bigint::operator*(const Bigint &other) const {
         }
     }
 
-    // Remove leading zeros
     std::reverse(result.begin(), result.end());
     while (result.size() > 1 && result.back() == 0) {
         result.pop_back();
@@ -172,9 +171,50 @@ Bigint Bigint::operator*(const Bigint &other) const {
 }
 
 Bigint Bigint::operator/(const Bigint &other) const {
-    int64_t value1 = _is_negative ? -std::stoll(_value) : std::stoll(_value);
-    int64_t value2 = other._is_negative ? -std::stoll(other._value) : std::stoll(other._value);
-    return Bigint(value1 / value2);
+    if (other == Bigint(0)) {
+        throw std::runtime_error("Division by zero");
+    }
+
+    Bigint value1 = *this;
+    Bigint value2 = other;
+
+    bool is_negative = value1._is_negative ^ value2._is_negative;
+    if (value1._is_negative) {
+        value1 = -value1;
+    }
+    if (value2._is_negative) {
+        value2 = -value2;
+    }
+
+    std::string result;
+    Bigint temp(0);
+
+    for (char c : value1._value) {
+        temp *= Bigint(10);
+        temp += Bigint(c - '0');
+        size_t count = 0;
+        while (Bigint(temp) >= Bigint(value2)) {
+            temp -= Bigint(value2);
+            count++;
+        }
+        result += static_cast<char>('0' + count);
+    }
+
+    std::reverse(result.begin(), result.end());
+    while (result.size() > 1 && result.back() == '0') {
+        result.pop_back();
+    }
+    std::reverse(result.begin(), result.end());
+
+    if (result == "0") {
+        is_negative = false;
+    }
+
+    if (!is_negative) {
+        return Bigint(result);
+    } else {
+        return Bigint("-" + result);
+    }
 }
 
 Bigint &Bigint::operator+=(const Bigint &other) {
