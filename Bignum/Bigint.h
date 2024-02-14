@@ -45,24 +45,40 @@ public:
     /// \note This method is static
     static std::string subtract(std::string value1, std::string value2);
 
+    /// Addition operator of two Bigint
     Bigint operator+(const Bigint &other) const;
+    /// Subtraction operator of two Bigint
     Bigint operator-(const Bigint &other) const;
+    /// Multiplication operator of two Bigint
     Bigint operator*(const Bigint &other) const;
+    /// Division operator of two Bigint
     Bigint operator/(const Bigint &other) const;
 
+    /// Assignment addition operator of two Bigint
     Bigint &operator+=(const Bigint &other);
+    /// Assignment subtraction operator of two Bigint
     Bigint &operator-=(const Bigint &other);
+    /// Assignment multiplication operator of two Bigint
     Bigint &operator*=(const Bigint &other);
+    /// Assignment division operator of two Bigint
     Bigint &operator/=(const Bigint &other);
 
+    /// Equality operator of two Bigint
     bool operator==(const Bigint &other) const;
+    /// Inequality operator of two Bigint
     bool operator!=(const Bigint &other) const;
+    /// Less than operator of two Bigint
     bool operator<(const Bigint &other) const;
+    /// Greater than operator of two Bigint
     bool operator>(const Bigint &other) const;
+    /// Less than or equal to operator of two Bigint
     bool operator<=(const Bigint &other) const;
+    /// Greater than or equal to operator of two Bigint
     bool operator>=(const Bigint &other) const;
 
+    /// Output stream operator
     friend std::ostream &operator<<(std::ostream &os, const Bigint &bigint);
+    /// Input stream operator
     friend std::istream &operator>>(std::istream &is, Bigint &bigint);
 
 private:
