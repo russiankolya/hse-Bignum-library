@@ -4,13 +4,29 @@
 
 class Bigint {
 public:
+    /// Default constructor
+    /// \param value int64_t value to be converted to Bigint
     explicit Bigint(int64_t value = 0);
+
+    /// String constructor
+    /// \param value string value to be converted to Bigint
     explicit Bigint(const std::string &value);
 
+    /// value getter
+    /// \return std::string absolut value of the Bigint
     [[nodiscard]] std::string get_value() const;
+
+    /// is_negative getter
+    /// \return bool true if the Bigint is negative
     [[nodiscard]] bool is_negative() const;
+
+
+    /// to_string method
+    /// \returns string representation of the Bigint
     [[nodiscard]] std::string to_string() const;
 
+    /// Unary minus operator
+    /// \returns Bigint with the opposite sign
     Bigint operator-() const;
 
     Bigint operator+(const Bigint &other) const;
@@ -35,7 +51,7 @@ public:
 
 private:
     std::string _value;
-    bool _isNegative;
+    bool _is_negative;
 
     static std::string add(const std::string& value1, const std::string& value2);
     static std::string subtract(const std::string& value1, const std::string& value2);
