@@ -11,14 +11,18 @@ Bigint::Bigint(int64_t value) {
 }
 
 Bigint::Bigint(const std::string &value) {
+    _value = value;
+    _is_negative = false;
     if (value[0] == '-') {
         _value = value.substr(1);
         if (_value != "0") {
             _is_negative = true;
         }
-    } else {
-        _is_negative = false;
-        _value = value;
+    }
+    if (std::any_of(_value.begin(), _value.end(), [](char c) { return !std::isdigit(c); })
+        || _value.empty()
+        || (_value[0] == '0' && _value.size() > 1)) {
+        throw std::runtime_error("Invalid number format");
     }
 }
 
