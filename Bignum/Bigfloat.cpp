@@ -1,10 +1,5 @@
 #include "Bigfloat.h"
 
-Bigfloat::Bigfloat(Bigint number, uint8_t precision) {
-    _number = number;
-    _precision = precision;
-}
-
 Bigfloat::Bigfloat(std::string number, uint8_t precision) : _precision(precision) {
     bool is_negative = false;
     if (number[0] == '-') {
