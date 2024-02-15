@@ -79,4 +79,6 @@ private:
     explicit Bigfloat(Bigint number, uint8_t precision = 6);
 };
 
+Bigfloat operator""_bf(const char* number, size_t size);
+
 #endif

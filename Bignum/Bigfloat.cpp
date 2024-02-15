@@ -50,7 +50,6 @@ Bigfloat::Bigfloat(std::string number, uint8_t precision) : _precision(precision
         }
         std::reverse(fractional_part.begin(), fractional_part.end());
 
-
         std::string result;
 
         if (integer_part != "0") {
@@ -263,4 +262,8 @@ std::istream &operator>>(std::istream &is, Bigfloat &bigfloat) {
     is >> number;
     bigfloat = Bigfloat(number, bigfloat.precision());
     return is;
+}
+
+Bigfloat operator ""_bf(const char *number, size_t size) {
+    return Bigfloat(std::string(number, size));
 }

@@ -32,10 +32,15 @@ Bigfloat calculate() {
 }
 
 int main() {
+    Bigfloat a = "1.234"_bf;
+
+    std::cout << a << "\n";
+
     auto start = std::chrono::high_resolution_clock::now();
     Bigfloat pi = calculate();
     auto end = std::chrono::high_resolution_clock::now();
 
     std::cout << "First " << PRECISION << " of pi after decimal point is: " << pi << "\n";
-    std::cout << "Execution time: " << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count() << "ms\n";
+    std::cout << "Execution time: " << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()
+              << "ms\n";
 }
