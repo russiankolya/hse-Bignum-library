@@ -45,7 +45,7 @@ Bigfloat::Bigfloat(std::string number, uint8_t precision) : _precision(precision
 
         //remove leading zeros from fractional part
         std::reverse(fractional_part.begin(), fractional_part.end());
-        while (fractional_part.back() == '0') {
+        while (fractional_part.back() == '0' && fractional_part.size() > 1) {
             fractional_part.pop_back();
         }
         std::reverse(fractional_part.begin(), fractional_part.end());

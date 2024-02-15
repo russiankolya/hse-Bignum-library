@@ -277,3 +277,10 @@ TEST(BigfloatTest, testMultiply5) {
     ASSERT_EQ(bigfloat1.multiply(bigfloat2, 6).to_string(), "1.000000");
     ASSERT_EQ(bigfloat2.multiply(bigfloat1, 6).to_string(), "1.000000");
 }
+
+TEST(BigfloatTest, testMultiply6) {
+    Bigfloat bigfloat1("0.00000000000000000098347598347534982345234532453245234534267349507689045376894537698453769887234598623789456", 6);
+    Bigfloat bigfloat2("1000020353452345324523453459785756834789573289457894890275893475983475893478953498347347578934682457689054604", 6);
+    ASSERT_EQ(bigfloat1.multiply(bigfloat2, 0).to_string(), "0");
+    ASSERT_EQ(bigfloat2.multiply(bigfloat1, 0).to_string(), "0");
+}
