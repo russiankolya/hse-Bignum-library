@@ -9,18 +9,20 @@ Bigfloat calculate() {
 
     uint8_t k = 0;
     Bigfloat degree_of_16 = Bigfloat("1", PRECISION);
+    Bigfloat cur_8k_value = Bigfloat("0", PRECISION);
     while (true) {
-        Bigfloat a1 = Bigfloat("4", PRECISION) / (Bigfloat(std::to_string(8 * k), PRECISION) + Bigfloat("1", PRECISION));
-        Bigfloat a2 = Bigfloat("2", PRECISION) / (Bigfloat(std::to_string(8 * k), PRECISION) + Bigfloat("4", PRECISION));
-        Bigfloat a3 = Bigfloat("1", PRECISION) / (Bigfloat(std::to_string(8 * k), PRECISION) + Bigfloat("5", PRECISION));
-        Bigfloat a4 = Bigfloat("1", PRECISION) / (Bigfloat(std::to_string(8 * k), PRECISION) + Bigfloat("6", PRECISION));
+        Bigfloat a1 = Bigfloat("4", PRECISION) / (cur_8k_value + Bigfloat("1", PRECISION));
+        Bigfloat a2 = Bigfloat("2", PRECISION) / (cur_8k_value + Bigfloat("4", PRECISION));
+        Bigfloat a3 = Bigfloat("1", PRECISION) / (cur_8k_value + Bigfloat("5", PRECISION));
+        Bigfloat a4 = Bigfloat("1", PRECISION) / (cur_8k_value + Bigfloat("6", PRECISION));
 
-        Bigfloat sum = a1 - a2 - a3 - a4;
-        sum /= degree_of_16;
+        Bigfloat sum = (a1 - a2 - a3 - a4) / degree_of_16;
 
-        if (sum > Bigfloat("0", 1)) {
+        if (sum > Bigfloat("0", PRECISION)) {
             pi += sum;
             ++k;
+
+            cur_8k_value += Bigfloat("8", PRECISION);
             degree_of_16 *= Bigfloat("16", PRECISION);
         } else {
             break;
