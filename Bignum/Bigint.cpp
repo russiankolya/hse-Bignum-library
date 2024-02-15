@@ -110,7 +110,7 @@ Bigint Bigint::operator+(const Bigint &other) const {
         if (!_is_negative) {
             return Bigint(add(_value, other._value));
         } else {
-            return -Bigint(add((-*this)._value, (-other)._value));;
+            return -Bigint(add((-*this)._value, (-other)._value));
         }
     } else {
         if (!_is_negative) {
