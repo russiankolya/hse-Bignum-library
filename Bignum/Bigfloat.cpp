@@ -179,6 +179,10 @@ Bigfloat Bigfloat::operator*(const Bigfloat &other) const {
     return multiply(other, std::max(_precision, other._precision));
 }
 
+Bigfloat Bigfloat::operator/(const Bigfloat &other) const {
+    return divide(other, std::max(_precision, other._precision));
+}
+
 Bigfloat Bigfloat::operator+=(const Bigfloat &other) {
     *this = (*this).add(other, _precision);
     return *this;
@@ -191,6 +195,11 @@ Bigfloat Bigfloat::operator-=(const Bigfloat &other) {
 
 Bigfloat Bigfloat::operator*=(const Bigfloat &other) {
     *this = (*this).multiply(other, _precision);
+    return *this;
+}
+
+Bigfloat Bigfloat::operator/=(const Bigfloat &other) {
+    *this = (*this).divide(other, _precision);
     return *this;
 }
 
