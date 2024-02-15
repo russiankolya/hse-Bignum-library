@@ -317,3 +317,72 @@ TEST(BigfloatTest, testDivide5) {
     Bigfloat bigfloat2("-534.6534", 4);
     ASSERT_EQ(bigfloat2.divide(bigfloat1, 10).to_string(), "0.0434242883");
 }
+
+TEST(BigfloatTest, testDivide6) {
+    Bigfloat bigfloat1("12312.3123", 4);
+    Bigfloat bigfloat2("0.000000000", 4);
+    Bigfloat res;
+    ASSERT_ANY_THROW(res = bigfloat1.divide(bigfloat2, 10));
+}
+
+
+
+/// Equality operator test
+TEST(BigfloatTest, testEqualityOperator1) {
+    Bigfloat bigfloat1("123.456789", 6);
+    Bigfloat bigfloat2("123.456789", 6);
+    ASSERT_TRUE(bigfloat1 == bigfloat2);
+    ASSERT_TRUE(bigfloat1 == bigfloat2);
+}
+
+TEST(BigfloatTest, testEqualityOperator2) {
+    Bigfloat bigfloat1("123.456789", 6);
+    Bigfloat bigfloat2("123.4567890000", 10);
+    ASSERT_TRUE(bigfloat1 == bigfloat2);
+    ASSERT_TRUE(bigfloat2 == bigfloat1);
+}
+
+TEST(BigfloatTest, testEqualityOperator3) {
+    Bigfloat bigfloat1("-0.000", 6);
+    Bigfloat bigfloat2("0.0000000", 4);
+    ASSERT_TRUE(bigfloat1 == bigfloat2);
+    ASSERT_TRUE(bigfloat2 == bigfloat1);
+}
+
+
+
+/// Less than operator test
+TEST(BigfloatTest, testLessThanOperator1) {
+    Bigfloat bigfloat1("123.456789", 6);
+    Bigfloat bigfloat2("123.456789", 6);
+    ASSERT_FALSE(bigfloat1 < bigfloat2);
+    ASSERT_FALSE(bigfloat2 < bigfloat1);
+}
+
+TEST(BigfloatTest, testLessThanOperator2) {
+    Bigfloat bigfloat1("123.456789", 6);
+    Bigfloat bigfloat2("123.4567890000", 10);
+    ASSERT_FALSE(bigfloat1 < bigfloat2);
+    ASSERT_FALSE(bigfloat2 < bigfloat1);
+}
+
+TEST(BigfloatTest, testLessThanOperator3) {
+    Bigfloat bigfloat1("-0.000", 6);
+    Bigfloat bigfloat2("0.0000000", 4);
+    ASSERT_FALSE(bigfloat1 < bigfloat2);
+    ASSERT_FALSE(bigfloat2 < bigfloat1);
+}
+
+TEST(BigfloatTest, testLessThanOperator4) {
+    Bigfloat bigfloat1("123.456789", 6);
+    Bigfloat bigfloat2("123.4567891000", 10);
+    ASSERT_TRUE(bigfloat1 < bigfloat2);
+    ASSERT_FALSE(bigfloat2 < bigfloat1);
+}
+
+TEST(BigfloatTest, testLessThanOperator5) {
+    Bigfloat bigfloat1("-0.001", 6);
+    Bigfloat bigfloat2("0.0000001", 4);
+    ASSERT_TRUE(bigfloat1 < bigfloat2);
+    ASSERT_FALSE(bigfloat2 < bigfloat1);
+}
