@@ -1,7 +1,9 @@
 #include "Bigfloat.h"
 
+#include <utility>
+
 Bigfloat::Bigfloat(Bigint number, uint8_t precision) {
-    _number = number;
+    _number = std::move(number);
     _precision = precision;
 }
 
