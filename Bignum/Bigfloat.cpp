@@ -139,6 +139,34 @@ Bigfloat Bigfloat::multiply(const Bigfloat &other, uint8_t precision) const {
     return Bigfloat(result, precision);
 }
 
+Bigfloat Bigfloat::divide(const Bigfloat &other, uint8_t precision) const {
+    if (other._number == Bigint("0")) {
+        throw std::runtime_error("Division by zero");
+    }
+
+    Bigint number1 = _number;
+    Bigint number2 = other._number;
+    uint8_t number1_precision = _precision;
+    uint8_t number2_precision = other._precision;
+
+    while (number1_precision < number2_precision) {
+        number1 *= Bigint(10);
+        number1_precision++;
+    }
+    while (number2_precision < number1_precision) {
+        number2 *= Bigint(10);
+        number2_precision++;
+    }
+
+    for (uint8_t i = 0; i < precision; i++) {
+        number1 *= Bigint(10);
+    }
+
+    Bigint result = number1 / number2;
+    return Bigfloat(result, precision);
+
+}
+
 Bigfloat Bigfloat::operator+(const Bigfloat &other) const {
     return add(other, std::max(_precision, other._precision));
 }
@@ -166,21 +194,21 @@ Bigfloat Bigfloat::operator*=(const Bigfloat &other) {
     return *this;
 }
 
-bool Bigfloat::operator!=(const Bigfloat &other) const {
-    return !(*this == other);
-}
-
-bool Bigfloat::operator>(const Bigfloat &other) const {
-    return !(*this < other || *this == other);
-}
-
-bool Bigfloat::operator<=(const Bigfloat &other) const {
-    return *this < other || *this == other;
-}
-
-bool Bigfloat::operator>=(const Bigfloat &other) const {
-    return *this > other || *this == other;
-}
+//bool Bigfloat::operator!=(const Bigfloat &other) const {
+//    return !(*this == other);
+//}
+//
+//bool Bigfloat::operator>(const Bigfloat &other) const {
+//    return !(*this < other || *this == other);
+//}
+//
+//bool Bigfloat::operator<=(const Bigfloat &other) const {
+//    return *this < other || *this == other;
+//}
+//
+//bool Bigfloat::operator>=(const Bigfloat &other) const {
+//    return *this > other || *this == other;
+//}
 
 std::ostream &operator<<(std::ostream &os, const Bigfloat &bigfloat) {
     os << bigfloat.to_string();

@@ -284,3 +284,36 @@ TEST(BigfloatTest, testMultiply6) {
     ASSERT_EQ(bigfloat1.multiply(bigfloat2, 0).to_string(), "0");
     ASSERT_EQ(bigfloat2.multiply(bigfloat1, 0).to_string(), "0");
 }
+
+
+
+/// Division function test
+TEST(BigfloatTest, testDivide1) {
+    Bigfloat bigfloat1("123.456789", 6);
+    Bigfloat bigfloat2("123.456789", 6);
+    ASSERT_EQ(bigfloat1.divide(bigfloat2, 6).to_string(), "1.000000");
+}
+
+TEST(BigfloatTest, testDivide2) {
+    Bigfloat bigfloat1("1", 0);
+    Bigfloat bigfloat2("3", 0);
+    ASSERT_EQ(bigfloat1.divide(bigfloat2, 100).to_string(), "0." + std::string(100, '3'));
+}
+
+TEST(BigfloatTest, testDivide3) {
+    Bigfloat bigfloat1("12312.3123", 4);
+    Bigfloat bigfloat2("5346.534", 3);
+    ASSERT_EQ(bigfloat1.divide(bigfloat2, 10).to_string(), "2.3028586931");
+}
+
+TEST(BigfloatTest, testDivide4) {
+    Bigfloat bigfloat1("-12312.3123", 4);
+    Bigfloat bigfloat2("5346.534", 3);
+    ASSERT_EQ(bigfloat2.divide(bigfloat1, 10).to_string(), "-0.4342428838");
+}
+
+TEST(BigfloatTest, testDivide5) {
+    Bigfloat bigfloat1("-12312.3123", 4);
+    Bigfloat bigfloat2("-534.6534", 4);
+    ASSERT_EQ(bigfloat2.divide(bigfloat1, 10).to_string(), "0.0434242883");
+}
