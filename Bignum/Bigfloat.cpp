@@ -139,6 +139,49 @@ Bigfloat Bigfloat::multiply(const Bigfloat &other, uint8_t precision) const {
     return Bigfloat(result, precision);
 }
 
+Bigfloat Bigfloat::operator+(const Bigfloat &other) const {
+    return add(other, std::max(_precision, other._precision));
+}
+
+Bigfloat Bigfloat::operator-(const Bigfloat &other) const {
+    return subtract(other, std::max(_precision, other._precision));
+}
+
+Bigfloat Bigfloat::operator*(const Bigfloat &other) const {
+    return multiply(other, std::max(_precision, other._precision));
+}
+
+Bigfloat Bigfloat::operator+=(const Bigfloat &other) {
+    *this = (*this).add(other, _precision);
+    return *this;
+}
+
+Bigfloat Bigfloat::operator-=(const Bigfloat &other) {
+    *this = (*this).subtract(other, _precision);
+    return *this;
+}
+
+Bigfloat Bigfloat::operator*=(const Bigfloat &other) {
+    *this = (*this).multiply(other, _precision);
+    return *this;
+}
+
+bool Bigfloat::operator!=(const Bigfloat &other) const {
+    return !(*this == other);
+}
+
+bool Bigfloat::operator>(const Bigfloat &other) const {
+    return !(*this < other || *this == other);
+}
+
+bool Bigfloat::operator<=(const Bigfloat &other) const {
+    return *this < other || *this == other;
+}
+
+bool Bigfloat::operator>=(const Bigfloat &other) const {
+    return *this > other || *this == other;
+}
+
 std::ostream &operator<<(std::ostream &os, const Bigfloat &bigfloat) {
     os << bigfloat.to_string();
     return os;
