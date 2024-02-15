@@ -203,21 +203,55 @@ Bigfloat Bigfloat::operator/=(const Bigfloat &other) {
     return *this;
 }
 
-//bool Bigfloat::operator!=(const Bigfloat &other) const {
-//    return !(*this == other);
-//}
-//
-//bool Bigfloat::operator>(const Bigfloat &other) const {
-//    return !(*this < other || *this == other);
-//}
-//
-//bool Bigfloat::operator<=(const Bigfloat &other) const {
-//    return *this < other || *this == other;
-//}
-//
-//bool Bigfloat::operator>=(const Bigfloat &other) const {
-//    return *this > other || *this == other;
-//}
+bool Bigfloat::operator==(const Bigfloat &other) const {
+    Bigint number1 = _number;
+    Bigint number2 = other._number;
+    uint8_t number1_precision = _precision;
+    uint8_t number2_precision = other._precision;
+
+    while (number1_precision < number2_precision) {
+        number1 *= Bigint(10);
+        number1_precision++;
+    }
+    while (number2_precision < number1_precision) {
+        number2 *= Bigint(10);
+        number2_precision++;
+    }
+    return number1 == number2;
+}
+
+bool Bigfloat::operator<(const Bigfloat &other) const {
+    Bigint number1 = _number;
+    Bigint number2 = other._number;
+    uint8_t number1_precision = _precision;
+    uint8_t number2_precision = other._precision;
+
+    while (number1_precision < number2_precision) {
+        number1 *= Bigint(10);
+        number1_precision++;
+    }
+    while (number2_precision < number1_precision) {
+        number2 *= Bigint(10);
+        number2_precision++;
+    }
+    return number1 < number2;
+}
+
+bool Bigfloat::operator!=(const Bigfloat &other) const {
+    return !(*this == other);
+}
+
+bool Bigfloat::operator>(const Bigfloat &other) const {
+    return !(*this < other || *this == other);
+}
+
+bool Bigfloat::operator<=(const Bigfloat &other) const {
+    return *this < other || *this == other;
+}
+
+bool Bigfloat::operator>=(const Bigfloat &other) const {
+    return *this > other || *this == other;
+}
 
 std::ostream &operator<<(std::ostream &os, const Bigfloat &bigfloat) {
     os << bigfloat.to_string();
