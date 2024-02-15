@@ -15,11 +15,9 @@ public:
     /// value getter
     /// \return std::string absolut value of the Bigint
     [[nodiscard]] std::string value() const;
-
     /// is_negative getter
     /// \return bool true if the Bigint is negative
     [[nodiscard]] bool is_negative() const;
-
 
     /// to_string method
     /// \returns string representation of the Bigint
@@ -29,14 +27,12 @@ public:
     /// \returns Bigint with the opposite sign
     Bigint operator-() const;
 
-
     /// Addition of two strings representing Bigint
     /// \param value1 first string
     /// \param value2 second string
     /// \returns string representing the sum of the two strings
     /// \note This method is static
     static std::string add(std::string value1, std::string value2);
-
     /// Subtraction of two strings representing Bigint
     /// \param value1 first string
     /// \param value2 second string
