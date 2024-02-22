@@ -1,5 +1,4 @@
 #include "Bigfloat.h"
-
 #include <utility>
 
 Bigfloat::Bigfloat(Bigint number, uint8_t precision) {

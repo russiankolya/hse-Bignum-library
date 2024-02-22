@@ -1,4 +1,5 @@
 #include "Bigint.h"
+#include <vector>
 
 Bigint::Bigint(int64_t value) {
     if (value < 0) {
