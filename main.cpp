@@ -30,6 +30,19 @@ Bigfloat calculate(int precision) {
 }
 
 int main() {
+    std::cout << "Simple tests of the basic operators:\n";
+    std::cout << "a: Bigfloat(\"1.123\")\n";
+    std::cout << "b: Bigfloat(\"2.246\")\n";
+    auto a = Bigfloat("1.123");
+    auto b = Bigfloat("2.246");
+
+    std::cout << "a + b: " << a + b << "\n";
+    std::cout << "a - b: " << a - b << "\n";
+    std::cout << "a * b: " << a * b << "\n";
+    std::cout << "a / b: " << a / b << "\n";
+    std::cout << "\n";
+
+    std::cout << "Enter required precision: ";
     int precision;
     std::cin >> precision;
 
