@@ -25,16 +25,6 @@ public:
     /// \returns Bigfloat with the opposite sign
     Bigfloat operator-() const;
 
-    /// Addition of two Bigfloat with given precision
-    [[nodiscard]] Bigfloat add(const Bigfloat& other, uint8_t precision) const;
-    /// Subtraction of two Bigfloat with given precision
-    [[nodiscard]] Bigfloat subtract(const Bigfloat& other, uint8_t precision) const;
-    /// Multiplication of two Bigfloat with given precision
-    [[nodiscard]] Bigfloat multiply(const Bigfloat& other, uint8_t precision) const;
-    /// Division of two Bigfloat with given precision
-    [[nodiscard]] Bigfloat divide(const Bigfloat& other, uint8_t precision) const;
-
-
     /// Addition operator of two Bigfloat
     Bigfloat operator+(const Bigfloat& other) const;
     /// Subtraction operator of two Bigfloat
@@ -77,6 +67,15 @@ private:
     uint8_t _precision;
 
     explicit Bigfloat(Bigint number, uint8_t precision = 6);
+
+    /// Addition of two Bigfloat with given precision
+    [[nodiscard]] Bigfloat add(const Bigfloat& other, uint8_t precision) const;
+    /// Subtraction of two Bigfloat with given precision
+    [[nodiscard]] Bigfloat subtract(const Bigfloat& other, uint8_t precision) const;
+    /// Multiplication of two Bigfloat with given precision
+    [[nodiscard]] Bigfloat multiply(const Bigfloat& other, uint8_t precision) const;
+    /// Division of two Bigfloat with given precision
+    [[nodiscard]] Bigfloat divide(const Bigfloat& other, uint8_t precision) const;
 };
 
 Bigfloat operator""_bf(const char* number, size_t size);
